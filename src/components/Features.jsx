@@ -126,7 +126,8 @@ function Panel({ index, icon: Icon, title, claim, body, note, visual, reverse })
 
 function Frame({ children, label }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-line bg-surface/70 backdrop-blur-xl">
+    <div className="relative overflow-hidden rounded-2xl border border-line bg-surface"
+        style={{ boxShadow: 'var(--shadow-card)' }}>
       {label && (
         <div className="border-b border-line px-4 py-2.5 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-fg-dim">
           {label}

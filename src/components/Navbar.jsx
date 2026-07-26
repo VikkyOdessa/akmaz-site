@@ -39,7 +39,9 @@ export default function Navbar() {
           className={[
             'transition-all duration-500',
             lifted
-              ? 'border-b border-line bg-void/70 backdrop-blur-xl'
+              // A light page needs a more opaque bar than a dark one: at 70% the
+              // grid behind it shows through the text and the header looks smudged.
+              ? 'border-b border-line bg-surface-xl'
               : 'border-b border-transparent bg-transparent',
           ].join(' ')}
         >
@@ -72,7 +74,7 @@ export default function Navbar() {
               </a>
               <a
                 href={SIGNUP}
-                className="group inline-flex items-center gap-1.5 rounded-full border border-line-bright bg-surface px-4 py-2 text-[0.88rem] font-medium transition-colors hover:border-stamp/60 hover:bg-surface-2"
+                className="group inline-flex items-center gap-1.5 rounded-full border border-line-bright bg-surface px-4 py-2 text-[0.88rem] font-medium transition-colors hover:border-stamp/50 hover:bg-surface-2"
               >
                 Try it free
                 <ArrowUpRight className="size-3.5 text-fg-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-stamp" />
@@ -97,7 +99,7 @@ export default function Navbar() {
         initial={false}
         animate={{ height: open ? 'auto' : 0, opacity: open ? 1 : 0 }}
         transition={{ duration: 0.36, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed inset-x-0 top-16 z-40 overflow-hidden border-b border-line bg-void/95 backdrop-blur-xl md:hidden"
+        className="fixed inset-x-0 top-16 z-40 overflow-hidden border-b border-line bg-void md:hidden"
         style={{ pointerEvents: open ? 'auto' : 'none' }}
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-5">
@@ -115,7 +117,7 @@ export default function Navbar() {
             <a href={LOGIN} className="flex-1 rounded-full border border-line px-4 py-2.5 text-center text-[0.9rem] text-fg-muted">
               Sign in
             </a>
-            <a href={SIGNUP} className="flex-1 rounded-full border border-stamp/50 bg-stamp/10 px-4 py-2.5 text-center text-[0.9rem] font-medium text-fg">
+            <a href={SIGNUP} className="flex-1 rounded-full border border-stamp/50 bg-stamp/8 px-4 py-2.5 text-center text-[0.9rem] font-medium text-fg">
               Try it free
             </a>
           </div>

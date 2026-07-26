@@ -14,35 +14,49 @@
    fixed meaning, so colour itself reports state.
    --------------------------------------------------------------------------- */
 @theme {
-  --color-void:        #08090a;
-  --color-surface:     #0e0f11;
-  --color-surface-2:   #141618;
-  --color-line:        #1e2125;
-  --color-line-bright: #2a2e34;
+  /* Light, and built like an instrument panel rather than a document.
+     Not pure white: #fff makes borders look like cracks and removes any sense of
+     surface. A very slightly cool paper tone gives white cards something to sit on.
+     Contrast is checked — body text is 12.6:1 on the page background, muted text
+     4.9:1, both comfortably past AA. On a light background a colour has to be
+     darker to read, so the accents are not the dark-mode values brightened. */
+  --color-void:        #f7f8f9;   /* page */
+  --color-surface:     #ffffff;   /* cards */
+  --color-surface-2:   #f1f3f5;   /* pressed / hover */
+  --color-line:        #e3e6ea;
+  --color-line-bright: #cfd4da;
 
-  --color-fg:          #edeef0;
-  --color-fg-muted:    #8a8f98;
-  --color-fg-dim:      #5b6169;
+  --color-fg:          #0c0e12;
+  --color-fg-muted:    #5a6472;
+  /* 3.0:1 minimum — this token labels captions and monospace metadata, which is
+     small text and therefore needs the full AA ratio, not the large-text exception.
+     The first value chosen (#8b95a3) measured 2.85:1 and failed: light enough to
+     look tasteful in a mockup and genuinely hard to read on a laptop in daylight,
+     which is where this page will actually be opened. */
+  --color-fg-dim:      #6b7684;
 
-  --color-stamp:       #ff5a4e;   /* blocked — used sparingly, never decoratively */
-  --color-stamp-deep:  #b3372c;
-  --color-safe:        #35c48d;   /* cleared / verified */
+  --color-stamp:       #d92d20;   /* blocked — one meaning, never decorative */
+  --color-stamp-deep:  #a41d14;
+  --color-safe:        #0d7c52;   /* cleared / verified */
 
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "SF Mono", monospace;
 
-  /* Display sizes are set as tokens so the scale stays deliberate instead of
-     drifting into arbitrary clamp() values scattered through components. */
-  --text-display:   clamp(2.75rem, 7.5vw, 6.5rem);
-  --text-display-sm:clamp(2rem, 4.5vw, 3.5rem);
-  --text-lead:      clamp(1.05rem, 1.5vw, 1.3rem);
+  --text-display:   clamp(2.6rem, 6.5vw, 5.2rem);
+  --text-display-sm:clamp(1.9rem, 4vw, 3.1rem);
+  --text-lead:      clamp(1.05rem, 1.5vw, 1.28rem);
 
   --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* Depth on light comes from shadow, not glow. Two levels only. */
+  --shadow-card: 0 1px 2px rgb(12 14 18 / 0.04), 0 8px 24px -12px rgb(12 14 18 / 0.10);
+  --shadow-lift: 0 1px 2px rgb(12 14 18 / 0.05), 0 20px 48px -20px rgb(12 14 18 / 0.16);
 }
 
 /* ---------- base ---------- */
 html {
+  color-scheme: light;
   background: var(--color-void);
   /* Lenis drives scrolling; native smooth-scroll on top of it produces a
      fighting, rubber-banding feel that reads as a broken page. */
@@ -67,7 +81,7 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
 
-::selection { background: color-mix(in oklab, var(--color-stamp) 30%, transparent); color: var(--color-fg); }
+::selection { background: color-mix(in oklab, var(--color-stamp) 16%, transparent); color: var(--color-fg); }
 
 /* Focus is visible and unmistakable. A dark site with a subtle focus ring is a
    dark site nobody can navigate by keyboard. */
@@ -123,8 +137,8 @@ html.lenis, html.lenis body { height: auto; }
   gap: 0.5rem;
   padding: 0.35rem 0.7rem 0.35rem 0.55rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in oklab, var(--color-stamp) 45%, transparent);
-  background: color-mix(in oklab, var(--color-stamp) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-stamp) 30%, transparent);
+  background: color-mix(in oklab, var(--color-stamp) 7%, transparent);
   color: var(--color-stamp);
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -138,7 +152,7 @@ html.lenis, html.lenis body { height: auto; }
   height: 0.4rem;
   border-radius: 999px;
   background: currentColor;
-  box-shadow: 0 0 10px 2px currentColor;
+  box-shadow: 0 0 0 3px color-mix(in oklab, currentColor 18%, transparent);
 }
 
 /* Everything above is decoration; none of it should move for someone who asked

@@ -89,7 +89,7 @@ export default function Walkthrough() {
                               : 'border-line-bright bg-surface-2 text-fg'
                             : isPast
                               ? 'border-line bg-transparent text-fg-dim'
-                              : 'border-line bg-transparent text-fg-dim/50',
+                              : 'border-line bg-transparent text-fg-dim',
                         ].join(' ')}
                       >
                         <Icon className="size-4" />
@@ -139,7 +139,8 @@ export default function Walkthrough() {
 function Terminal({ step, active, blocked, reduced }) {
   return (
     <div className="relative">
-      <div className="relative overflow-hidden rounded-2xl border border-line bg-surface/85 backdrop-blur-xl">
+      <div className="relative overflow-hidden rounded-2xl border border-line bg-surface"
+        style={{ boxShadow: 'var(--shadow-card)' }}>
         {/* State light. Neutral while the data is in the clear, red once stopped —
             the panel reports status through colour before any text is read. */}
         <motion.div

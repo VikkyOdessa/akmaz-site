@@ -144,7 +144,7 @@ function Stake({ stake, index }) {
       initial={{ opacity: 0, y: 16 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.09 * index }}
-      className="bg-surface/70 p-7 backdrop-blur-sm sm:p-8"
+      className="bg-surface p-7 backdrop-blur-sm sm:p-8"
     >
       <div
         className={[

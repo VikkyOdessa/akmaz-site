@@ -69,7 +69,7 @@ export function PrinciplesIntro() {
               initial={{ opacity: 0, y: 18 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.14 + i * 0.09, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative bg-surface/70 p-7 backdrop-blur-sm transition-colors hover:bg-surface-2 sm:p-8"
+              className="group relative bg-surface p-7 backdrop-blur-sm transition-colors hover:bg-surface-2 sm:p-8"
             >
               <p.icon className="size-5 text-fg-dim transition-colors group-hover:text-stamp" />
 
@@ -187,7 +187,8 @@ export function SimpleByDesign() {
           initial={{ opacity: 0, y: 22 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="overflow-hidden rounded-2xl border border-line bg-surface/80 backdrop-blur-xl"
+          className="overflow-hidden rounded-2xl border border-line bg-surface"
+            style={{ boxShadow: 'var(--shadow-card)' }}
         >
           <div className="flex items-center justify-between border-b border-line px-5 py-3.5">
             <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-dim">
@@ -214,7 +215,7 @@ export function SimpleByDesign() {
                         ? 'border-safe bg-safe/15 text-safe'
                         : started
                           ? 'border-line-bright bg-surface-2 text-fg'
-                          : 'border-line text-fg-dim/50',
+                          : 'border-line text-fg-dim',
                     ].join(' ')}
                   >
                     {done ? (
@@ -272,7 +273,7 @@ export function SimpleByDesign() {
 
 function Fact({ n, label }) {
   return (
-    <div className="bg-surface/70 px-4 py-5 text-center">
+    <div className="bg-surface px-4 py-5 text-center">
       <div className="display text-fg tnum" style={{ fontSize: '1.9rem' }}>
         {n}
       </div>

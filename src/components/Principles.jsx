@@ -103,7 +103,8 @@ function SecureByDefault() {
           initial={{ opacity: 0, y: 22 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="overflow-hidden rounded-2xl border border-line bg-surface/80 backdrop-blur-xl"
+          className="overflow-hidden rounded-2xl border border-line bg-surface"
+            style={{ boxShadow: 'var(--shadow-card)' }}
         >
           <div className="flex items-center justify-between border-b border-line px-5 py-3.5">
             <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-dim">
@@ -209,7 +210,8 @@ function PrivacyByArchitecture() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden rounded-2xl border border-line bg-surface/80 backdrop-blur-xl"
+            className="overflow-hidden rounded-2xl border border-line bg-surface"
+            style={{ boxShadow: 'var(--shadow-card)' }}
           >
             <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-3">
               <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-dim">
@@ -260,7 +262,8 @@ function PrivacyByArchitecture() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="overflow-hidden rounded-2xl border border-line bg-surface/80 backdrop-blur-xl"
+            className="overflow-hidden rounded-2xl border border-line bg-surface"
+            style={{ boxShadow: 'var(--shadow-card)' }}
           >
             <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-3">
               <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-dim">
@@ -295,7 +298,7 @@ function PrivacyByArchitecture() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -10 }}
                       transition={{ duration: 0.28 }}
-                      className="mb-2.5 flex items-start justify-between gap-4 rounded-lg border border-line bg-void/40 px-3.5 py-3"
+                      className="mb-2.5 flex items-start justify-between gap-4 rounded-lg border border-line bg-surface-2 px-3.5 py-3"
                     >
                       <span className="min-w-0">
                         <span

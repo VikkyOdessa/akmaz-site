@@ -74,7 +74,7 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 26 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-14 overflow-hidden rounded-2xl border border-line bg-surface/80 backdrop-blur-xl"
+          className="mt-14 overflow-hidden rounded-2xl border border-line bg-surface"
         >
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-3.5">
             <div className="flex items-center gap-2.5">
@@ -214,7 +214,7 @@ function DeviceRow({ device, index, active }) {
       initial={{ opacity: 0, x: -10 }}
       animate={active ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-      className="flex items-center justify-between gap-3 rounded-lg border border-line bg-void/40 px-3.5 py-2.5"
+      className="flex items-center justify-between gap-3 rounded-lg border border-line bg-surface-2 px-3.5 py-2.5"
     >
       <span className="min-w-0">
         <span className="block truncate font-mono text-[0.84rem] text-fg">{device.name}</span>
@@ -261,7 +261,7 @@ function FeedRow({ event, index, active }) {
         <span className="mt-0.5 block font-mono text-[0.72rem] text-fg-dim">
           {event.detail}
         </span>
-        <span className="mt-1 block font-mono text-[0.68rem] text-fg-dim/70">
+        <span className="mt-1 block font-mono text-[0.68rem] text-fg-dim">
           {event.device}
         </span>
       </span>

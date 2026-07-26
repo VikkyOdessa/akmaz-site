@@ -59,7 +59,7 @@ export function Limits() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.08 * i, ease: [0.16, 1, 0.3, 1] }}
               className={[
-                'bg-surface/70 p-7 backdrop-blur-sm sm:p-8',
+                'bg-surface p-7 backdrop-blur-sm sm:p-8',
                 // The last card spans both columns when the count is odd, so the grid
                 // does not end on a half-empty row.
                 i === LIMITS.length - 1 && LIMITS.length % 2 === 1 ? 'sm:col-span-2' : '',
@@ -115,7 +115,7 @@ export function Pricing() {
           initial={{ opacity: 0, y: 22 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mt-16 max-w-2xl overflow-hidden rounded-2xl border border-line bg-surface/80 backdrop-blur-xl"
+          className="mx-auto mt-16 max-w-2xl overflow-hidden rounded-2xl border border-line bg-surface"
         >
           <div className="border-b border-line px-7 py-6 text-center sm:px-9">
             <span className="pill">early access</span>
@@ -300,7 +300,7 @@ export function Footer() {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[60vh]"
           style={{
             background:
-              'radial-gradient(ellipse 80% 100% at 50% 100%, color-mix(in oklab, var(--color-stamp) 11%, transparent), transparent 70%)',
+              'radial-gradient(ellipse 80% 100% at 50% 100%, color-mix(in oklab, var(--color-stamp) 5%, transparent), transparent 70%)',
           }}
         />
 
