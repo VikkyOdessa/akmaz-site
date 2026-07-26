@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Tailwind 4: tokens live here, in CSS, not in a JS config file. Every name
+   declared under @theme becomes a utility — `--color-stamp` gives `text-stamp`,
+   `bg-stamp`, `border-stamp`. There is no tailwind.config.js in this project by
+   design; adding one back does nothing.
+
+   The palette is a dark instrument panel, not a marketing gradient: near-black
+   that is deliberately NOT #000 (pure black kills the sense of depth once glows
+   sit on top of it), a single warm red carried over from the earlier design
+   where it meant one thing only — something was blocked — and a green that
+   appears only when data is confirmed safe. Two accent colours, each with a
+   fixed meaning, so colour itself reports state.
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-void:        #08090a;
+  --color-surface:     #0e0f11;
+  --color-surface-2:   #141618;
+  --color-line:        #1e2125;
+  --color-line-bright: #2a2e34;
+
+  --color-fg:          #edeef0;
+  --color-fg-muted:    #8a8f98;
+  --color-fg-dim:      #5b6169;
+
+  --color-stamp:       #ff5a4e;   /* blocked — used sparingly, never decoratively */
+  --color-stamp-deep:  #b3372c;
+  --color-safe:        #35c48d;   /* cleared / verified */
+
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Display sizes are set as tokens so the scale stays deliberate instead of
+     drifting into arbitrary clamp() values scattered through components. */
+  --text-display:   clamp(2.75rem, 7.5vw, 6.5rem);
+  --text-display-sm:clamp(2rem, 4.5vw, 3.5rem);
+  --text-lead:      clamp(1.05rem, 1.5vw, 1.3rem);
+
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* ---------- base ---------- */
+html {
+  background: var(--color-void);
+  /* Lenis drives scrolling; native smooth-scroll on top of it produces a
+     fighting, rubber-banding feel that reads as a broken page. */
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  background: var(--color-void);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;   /* parallax layers extend past the viewport by design */
+}
+
+/* Lenis needs these two rules or the page scrolls twice — once natively, once
+   through the library. Documented requirement, not a workaround. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+::selection { background: color-mix(in oklab, var(--color-stamp) 30%, transparent); color: var(--color-fg); }
+
+/* Focus is visible and unmistakable. A dark site with a subtle focus ring is a
+   dark site nobody can navigate by keyboard. */
+:focus-visible {
+  outline: 2px solid var(--color-stamp);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Typographic details that carry most of the "expensive" feel: tight tracking on
+   display sizes, tabular figures anywhere numbers change while you watch them. */
+.display {
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* No film grain, no paper texture. The earlier design leaned on analogue
+   metaphors — stamped paper, printed rules, grain — and they contradict what this
+   product is: detection that happens in memory, in the gap between two keystrokes.
+   Depth here comes from light and from a hairline scanline, both of which belong to
+   an instrument rather than to a document.
+
+   A single scanline sweep, used only where something is being inspected. */
+.scan {
+  position: relative;
+  overflow: hidden;
+}
+.scan::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-stamp), transparent);
+  box-shadow: 0 0 16px 1px color-mix(in oklab, var(--color-stamp) 55%, transparent);
+  animation: scanline 2.6s var(--ease-in-out-quart) infinite;
+  opacity: 0.75;
+}
+@keyframes scanline {
+  0%   { transform: translateY(-4px); opacity: 0 }
+  12%  { opacity: .8 }
+  88%  { opacity: .8 }
+  100% { transform: translateY(var(--scan-height, 120px)); opacity: 0 }
+}
+
+/* Status pill — replaces the rubber stamp. Same job (report that something was
+   stopped), stated as a system state rather than an object pressed onto paper. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.7rem 0.35rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--color-stamp) 45%, transparent);
+  background: color-mix(in oklab, var(--color-stamp) 12%, transparent);
+  color: var(--color-stamp);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+.pill::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 10px 2px currentColor;
+}
+
+/* Everything above is decoration; none of it should move for someone who asked
+   the operating system to stop animations. */
+@media (prefers-reduced-motion: reduce) {
+  .scan::before { animation: none; opacity: 0; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

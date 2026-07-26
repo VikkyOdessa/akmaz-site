@@ -1,0 +1,65 @@
+# Build and publish to GitHub Pages.
+#
+# GitHub Pages does not build a React app. Pointing Pages at a branch publishes the
+# repository as-is: index.html loads /src/main.jsx, the browser cannot execute JSX,
+# and the result is a blank page with a console error nobody sees. The site has to be
+# compiled first, and that is what this workflow does on every push to main.
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # a manual "Run workflow" button, useful after changing settings
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it — a half-published site is
+# worse than a slightly stale one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # BASE_PATH is the difference between a working site and a white screen.
+      # A project page is served from https://user.github.io/<repo>/ — with base at
+      # '/' every asset 404s. With a custom domain the site IS at the root, so the
+      # variable must be empty. Set it in Settings → Secrets and variables →
+      # Actions → Variables, or leave it unset once akmaz.eu is live.
+      - run: npm run build
+        env:
+          BASE_PATH: ${{ vars.BASE_PATH }}
+
+      # Jekyll is still applied to Pages uploads unless told otherwise, and it
+      # silently drops directories beginning with an underscore — which is where
+      # bundlers like to put things.
+      - run: touch dist/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
