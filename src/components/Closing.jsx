@@ -2,9 +2,8 @@ import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'motion/react'
 import { Minus, Plus, ArrowUpRight } from 'lucide-react'
 import { Heading } from './Problem'
+import { SIGNUP, LOGIN } from '../lib/urls'
 
-const SIGNUP = 'https://hunter.website4u.tech/signup'
-const LOGIN = 'https://hunter.website4u.tech/login'
 
 /* ---------------------------------------------------------------------------
    Honest limits.

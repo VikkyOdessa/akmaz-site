@@ -3,6 +3,7 @@ import { motion, useInView, AnimatePresence } from 'motion/react'
 import { Lock, Sparkles, EyeOff, ArrowUpRight, Check } from 'lucide-react'
 import { analyse, SAMPLES } from '../lib/detect'
 import { Heading } from './Problem'
+import { SIGNUP } from '../lib/urls'
 
 /**
  * Three principles, each shown working rather than claimed.
@@ -339,7 +340,7 @@ function PrivacyByArchitecture() {
         </p>
 
         <a
-          href="https://hunter.website4u.tech/signup"
+          href={SIGNUP}
           className="group mt-10 inline-flex items-center gap-2 rounded-full border border-line-bright bg-surface px-5 py-3 text-[0.92rem] font-medium transition-colors hover:border-stamp/60 hover:bg-surface-2"
         >
           See it on a real machine

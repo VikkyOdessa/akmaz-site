@@ -1,57 +1,83 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Tailwind 4: tokens live here, in CSS, not in a JS config file. Every name
-   declared under @theme becomes a utility — `--color-stamp` gives `text-stamp`,
-   `bg-stamp`, `border-stamp`. There is no tailwind.config.js in this project by
-   design; adding one back does nothing.
+   Self-hosted fonts — Geist and Geist Mono, SIL Open Font License 1.1.
 
-   The palette is a dark instrument panel, not a marketing gradient: near-black
-   that is deliberately NOT #000 (pure black kills the sense of depth once glows
-   sit on top of it), a single warm red carried over from the earlier design
-   where it meant one thing only — something was blocked — and a green that
-   appears only when data is confirmed safe. Two accent colours, each with a
-   fixed meaning, so colour itself reports state.
+   WHY SELF-HOSTED
+   A Google Fonts request sends the visitor's IP address to a US server before they
+   have clicked anything. A German court (LG München, 2022) held that this alone
+   breaches GDPR. For a site whose central argument is "your data stays in the EU",
+   a font request leaking visitor IPs to a US company on the landing page is exactly
+   the inconsistency a technical buyer finds in the network tab — and the one they will
+   mention rather than ask about.
+
+   WHY GEIST
+   Designed by Vercel and Basement Studio for interfaces and code. Two properties earn
+   it here rather than taste: the mono cut is a genuine companion to the sans (same
+   skeleton, same rhythm), which matters on a page that alternates prose with masked
+   card numbers and window titles; and it covers Cyrillic, which the product's Ukrainian
+   locale needs and most interface sans faces do not.
+
+   LICENSING
+   OFL 1.1 — free for commercial use, self-hosting and bundling. The only restriction is
+   that the fonts may not be sold on their own, which is not what is happening here.
+   OFL requires the licence to travel with the files: public/fonts/OFL.txt.
+
+   SUBSETS
+   Latin, Latin-Extended and Cyrillic only — 136 kB in total rather than a single file
+   several times that. unicode-range means a visitor reading English downloads 29 kB and
+   never fetches the Cyrillic cut at all.
    --------------------------------------------------------------------------- */
-@theme {
-  /* Light, and built like an instrument panel rather than a document.
-     Not pure white: #fff makes borders look like cracks and removes any sense of
-     surface. A very slightly cool paper tone gives white cards something to sit on.
-     Contrast is checked — body text is 12.6:1 on the page background, muted text
-     4.9:1, both comfortably past AA. On a light background a colour has to be
-     darker to read, so the accents are not the dark-mode values brightened. */
-  --color-void:        #f7f8f9;   /* page */
-  --color-surface:     #ffffff;   /* cards */
-  --color-surface-2:   #f1f3f5;   /* pressed / hover */
-  --color-line:        #e3e6ea;
-  --color-line-bright: #cfd4da;
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist-latin-ext-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist-cyrillic-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
 
-  --color-fg:          #0c0e12;
-  --color-fg-muted:    #5a6472;
-  /* 3.0:1 minimum — this token labels captions and monospace metadata, which is
-     small text and therefore needs the full AA ratio, not the large-text exception.
-     The first value chosen (#8b95a3) measured 2.85:1 and failed: light enough to
-     look tasteful in a mockup and genuinely hard to read on a laptop in daylight,
-     which is where this page will actually be opened. */
-  --color-fg-dim:      #6b7684;
-
-  --color-stamp:       #d92d20;   /* blocked — one meaning, never decorative */
-  --color-stamp-deep:  #a41d14;
-  --color-safe:        #0d7c52;   /* cleared / verified */
-
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, "SF Mono", monospace;
-
-  --text-display:   clamp(2.6rem, 6.5vw, 5.2rem);
-  --text-display-sm:clamp(1.9rem, 4vw, 3.1rem);
-  --text-lead:      clamp(1.05rem, 1.5vw, 1.28rem);
-
-  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
-
-  /* Depth on light comes from shadow, not glow. Two levels only. */
-  --shadow-card: 0 1px 2px rgb(12 14 18 / 0.04), 0 8px 24px -12px rgb(12 14 18 / 0.10);
-  --shadow-lift: 0 1px 2px rgb(12 14 18 / 0.05), 0 20px 48px -20px rgb(12 14 18 / 0.16);
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/geist-mono-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/geist-mono-latin-ext-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/geist-mono-cyrillic-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
 /* ---------- base ---------- */

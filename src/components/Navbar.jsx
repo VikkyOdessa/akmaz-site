@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, useMotionValueEvent, useScroll } from 'motion/react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
+import { SIGNUP, LOGIN } from '../lib/urls'
 
 const LINKS = [
   { label: 'How it happens', href: '#how' },
@@ -9,8 +10,6 @@ const LINKS = [
   { label: 'Pricing', href: '#pricing' },
 ]
 
-const SIGNUP = 'https://hunter.website4u.tech/signup'
-const LOGIN = 'https://hunter.website4u.tech/login'
 
 /**
  * Fixed navigation that is invisible over the hero and materialises once the page

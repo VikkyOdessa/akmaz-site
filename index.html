@@ -29,9 +29,19 @@
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Fonts are self-hosted, not loaded from Google.
+       Requesting a webfont sends the visitor's IP address to Google in the United
+       States before they have interacted with anything. A German court (LG München,
+       2022) held that this alone breaches GDPR, and the reasoning applies to any site
+       in the EU. For a product whose whole argument is "your data stays in the EU", a
+       font request that leaks visitor IPs to a US company on the landing page is the
+       kind of inconsistency a technical buyer notices in the network tab.
+       There is also no cookie banner here because there are no cookies to consent to —
+       CNIL fined SHEIN €150m in 2025 for advertising cookies set before consent, and
+       the cheapest way to pass that test is to have nothing to ask about. -->
+  <!-- Preload the Latin cut only. The others are declared with unicode-range and
+       fetched on demand, so an English reader never downloads Cyrillic. -->
+  <link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
 
   <script type="application/ld+json">
   {

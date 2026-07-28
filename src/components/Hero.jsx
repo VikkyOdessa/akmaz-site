@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { ArrowDown, ArrowUpRight, Check, Lock, Layers, ShieldOff } from 'lucide-react'
 import { STEPS, BLOCK_FROM } from '../lib/steps'
+import { SIGNUP } from '../lib/urls'
 
-const SIGNUP = 'https://hunter.website4u.tech/signup'
 
 /**
  * The hero is the three principles, and nothing else competes with them.

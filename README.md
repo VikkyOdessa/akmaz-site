@@ -67,6 +67,23 @@ directories beginning with an underscore, which is where bundlers like to put th
 Open Graph image renders as an empty grey card on LinkedIn and Slack, which looks worse
 than having no preview at all.
 
+## Fonts
+
+Geist and Geist Mono, self-hosted from `public/fonts/`. SIL Open Font License 1.1 —
+commercial use, self-hosting and bundling are permitted; the fonts may not be sold on
+their own. `OFL.txt` sits beside the files because the licence requires it to travel
+with them.
+
+**Not Google Fonts, deliberately.** A webfont request sends the visitor's IP to a US
+server before they interact with anything; LG München held in 2022 that this alone
+breaches GDPR. On a site arguing that data stays in the EU, that is the inconsistency a
+technical reader finds in the network tab.
+
+Split by `unicode-range`: Latin (29 kB), Latin-Extended (16 kB), Cyrillic (15 kB). An
+English reader downloads the first and never fetches the rest. Only Latin is preloaded.
+
+To update: `npm pack @fontsource-variable/geist` and copy the `-wght-normal.woff2` files.
+
 ## Motion policy
 
 `prefers-reduced-motion` is honoured properly rather than nominally:
