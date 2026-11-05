@@ -11,7 +11,7 @@
  * product works perfectly well where it is. There is no technical reason to move
  * before someone outside the project is looking at the address.
  */
-export const PRODUCT = 'https://hunter.website4u.tech'
+   export const PRODUCT = 'https://app.akmaz.eu'
 
 export const SIGNUP = `${PRODUCT}/signup`
 export const LOGIN = `${PRODUCT}/login`
